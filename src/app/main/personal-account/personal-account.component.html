@@ -1,0 +1,57 @@
+<form (submit)="test2()" ngNativeValidate>
+  <section class="form-block">
+    <label>
+      Personal account
+    </label>
+
+    <div class="form-group">
+      <label for="formFields_9" class="required">Name</label>
+      <input type="text" id="formFields_9" size="35" required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="formFields_10" class="required">Telephone number</label>
+      <input type="tel" id="formFields_10" size="35" required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="formFields_11" class="required">e-mail</label>
+      <input type="email" id="formFields_11" size="35" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </section>
+</form>
+
+<form (submit)="changePassword()" [formGroup]="passwordChangeControl">
+  <section class="form-block">
+    <label>
+      Password change
+    </label>
+
+    <div class="form-group">
+      <label for="formFields_password_1">Password</label>
+      <input type="password" formControlName="newPassword"
+             id="formFields_password_1" placeholder="Password">
+
+      <label *ngIf="!passwordChangeControl.controls['newPassword'].valid && passwordChangeControl.controls['newPassword'].touched">
+        value is incorrect
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="formFields_password_2">Password (repeat)</label>
+      <input type="password" formControlName="repeatNewPassword"
+             id="formFields_password_2" placeholder="Password (repeat)">
+
+      <label *ngIf="!passwordChangeControl.controls['repeatNewPassword'].valid && passwordChangeControl.controls['repeatNewPassword'].touched">
+        value is incorrect
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!passwordChangeControl.valid">Change password</button>
+  </section>
+</form>
+

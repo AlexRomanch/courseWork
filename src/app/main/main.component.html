@@ -1,0 +1,32 @@
+<div class="main-container">
+  <header class="header header-6">
+    HEADER-6
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+    <nav class="sidenav">
+      <section class="sidenav-content">
+        <a class="nav-link active" routerLink="personalAccount">
+          Personal Account
+        </a>
+
+        <section class="nav-group collapsible">
+          <input id="tabexample1" type="checkbox">
+          <label for="tabexample1">
+            Accounts
+          </label>
+          <ul class="nav-list">
+            <li><a class="nav-link">Users</a></li>
+            <li><a class="nav-link">Organizations</a></li>
+          </ul>
+        </section>
+
+        <a class="nav-link" (click)="logout()">
+          Logout
+        </a>
+      </section>
+    </nav>
+  </div>
+</div>

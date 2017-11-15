@@ -1,16 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {ClarityModule} from 'clarity-angular';
+import {AppComponent} from './app.component';
+import {RouterModule} from '@angular/router';
+import {LoginComponent} from './login/login.component';
+import {MainComponent} from './main/main.component';
+import { PersonalAccountComponent } from './main/personal-account/personal-account.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthGuard} from './guards/auth.guard';
+import {AuthService} from "./services/auth.service";
 
-import { AppComponent } from './app.component';
+const routes = [
+  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'main', component: MainComponent, canActivate: [AuthGuard],
+    children: [
+      {path: 'personalAccount', component: PersonalAccountComponent}
+    ]
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    MainComponent,
+    PersonalAccountComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ClarityModule.forRoot(),
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
