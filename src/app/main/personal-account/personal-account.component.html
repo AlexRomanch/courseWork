@@ -1,4 +1,4 @@
-<form (submit)="test2()" ngNativeValidate>
+<form (submit)="saveAccountData()" [formGroup]="accountDataControl">
   <section class="form-block">
     <label>
       Personal account
@@ -6,22 +6,39 @@
 
     <div class="form-group">
       <label for="formFields_9" class="required">Name</label>
-      <input type="text" id="formFields_9" size="35" required>
+      <input type="text" id="formFields_9" size="35" formControlName="userName">
+      <label *ngIf="!accountDataControl.controls['userName'].valid && accountDataControl.controls['userName'].dirty">
+        value is incorrect
+      </label>
     </div>
 
 
     <div class="form-group">
       <label for="formFields_10" class="required">Telephone number</label>
-      <input type="tel" id="formFields_10" size="35" required>
+      <input type="tel" id="formFields_10" size="35" formControlName="phone">
+      <label *ngIf="!accountDataControl.controls['phone'].valid && accountDataControl.controls['phone'].dirty">
+        value is incorrect
+      </label>
     </div>
 
 
     <div class="form-group">
       <label for="formFields_11" class="required">e-mail</label>
-      <input type="email" id="formFields_11" size="35" required>
+      <input type="email" id="formFields_11" size="35" formControlName="email">
+      <label *ngIf="!accountDataControl.controls['email'].valid && accountDataControl.controls['email'].dirty">
+        value is incorrect
+      </label>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary"
+            [disabled]="!accountDataControl.valid">
+      Save
+    </button>
+
+    <label *ngIf="statusMessage">
+      {{statusMessage}}
+    </label>
+
   </section>
 </form>
 

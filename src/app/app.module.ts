@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
+import {AccountService} from "./services/account.service";
 
 const routes = [
   {path: '', component: LoginComponent},
@@ -36,7 +37,7 @@ const routes = [
     ClarityModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
