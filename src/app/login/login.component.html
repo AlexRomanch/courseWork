@@ -11,6 +11,11 @@
       <div class="error active" *ngIf="!loginGroupControl.valid && (loginGroupControl.touched)">
         Invalid user name or password
       </div>
+
+      <div class="error active" *ngIf="authFailedMsg">
+        {{authFailedMsg}}
+      </div>
+
       <button type="submit" class="btn btn-primary" [disabled]="!loginGroupControl.valid" (click)="login()">
         LOGIN
       </button>

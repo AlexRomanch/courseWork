@@ -9,6 +9,7 @@ import { PersonalAccountComponent } from './main/personal-account/personal-accou
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthService} from "./services/auth.service";
+import {HttpClientModule} from "@angular/common/http";
 
 const routes = [
   {path: '', component: LoginComponent},
@@ -30,6 +31,7 @@ const routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     ClarityModule.forRoot(),
     RouterModule.forRoot(routes)

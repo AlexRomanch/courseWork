@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {Cookie} from "ng2-cookies";
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   loginGroupControl: FormGroup;
+  authFailedMsg : string;
 
   constructor(private authService: AuthService,
               private router: Router) { }
@@ -30,14 +32,20 @@ export class LoginComponent implements OnInit {
     let login: string = this.loginGroupControl.get('login').value;
     let password: string = this.loginGroupControl.get('password').value;
 
-    //console.log('login: ',login,', password: ', password);
-    this.authService.authUser(login, password).subscribe(value => {
-      console.log(value);
-      if(value){
-        console.log('inside value! ',value);
-        this.router.navigate(['/main']);
-      }
-    });
+    this.authService.authUser(login, password).subscribe(
+      authResponse => {
+
+        if (authResponse.isAuth) {
+          this.authFailedMsg = '';
+          this.router.navigate(['/main']);
+        } else {
+          this.authFailedMsg = 'Incorrect login/password'
+        }
+
+      },
+      error => {
+        this.authFailedMsg = 'Server is unavailable';
+      });
   }
 
 }
