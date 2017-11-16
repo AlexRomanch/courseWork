@@ -9,14 +9,18 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
+  private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+
   getPersonalAccountData(userId: number): Observable<PersonalAccountData>{
     return this.http.get("http://localhost:8090/server/api/v1/user/personalAccount/" + userId);
   }
 
   updateAccountData(personalAccountData: PersonalAccountData): Observable<TypicalResponse>{
-    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    //let body = JSON.stringify(personalAccountData);
+    //let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post("http://localhost:8090/server/api/v1/user/updateAccountData", personalAccountData, {headers: this.headers});
+  }
 
-    return this.http.post("http://localhost:8090/server/api/v1/user/updateAccountData", personalAccountData, {headers: headers});
+  updatePassword(userId: number, password: string): Observable<TypicalResponse>{
+    return this.http.post("http://localhost:8090/server/api/v1/user/updatePassword", {userId: userId, newPassword:password}, {headers: this.headers});
   }
 }
