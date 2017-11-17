@@ -11,23 +11,27 @@ import {AuthGuard} from './guards/auth.guard';
 import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AccountService} from "./services/account.service";
+import { TestPageComponent } from './main/test-page/test-page.component';
 
 const routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'main', component: MainComponent, canActivate: [AuthGuard],
     children: [
-      {path: 'personalAccount', component: PersonalAccountComponent}
+      {path: 'personalAccount', component: PersonalAccountComponent},
+      {path: 'testPage', component: TestPageComponent}
     ]
   }
 ];
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
-    PersonalAccountComponent
+    PersonalAccountComponent,
+    TestPageComponent
   ],
   imports: [
     BrowserModule,
