@@ -83,7 +83,9 @@ export class TestProcessService {
         if(originDataGroup.group === readyTestGroupName){
           for(let originTest of originDataGroup.tests){
             if(originTest.name === readyTest.name){
-              if(originTest.result !== ''){
+
+              // изменяем значание, если его еще нет
+              if(originTest.result === ''){
                 originTest.result = readyTest.result;
 
                 if(originTest.result === 'success'){

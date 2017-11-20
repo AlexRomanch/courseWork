@@ -1,7 +1,7 @@
 export class TestObject{
   name: string;
   enable: boolean = true;
-  result: string = 'success';
+  result: string = '';
   group: string;
 
   testIcon;

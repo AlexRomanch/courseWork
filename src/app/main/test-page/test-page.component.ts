@@ -34,6 +34,7 @@ export class TestPageComponent implements OnInit {
 
 
   startTesting():void{
+    this.resetResults();
     this.testProcessService.startTestProcess(this.testTree).subscribe(sessionId => {
       if(sessionId){
         this.sessionId = sessionId;
@@ -42,6 +43,15 @@ export class TestPageComponent implements OnInit {
         this.processWatcher.processRun();
       }
     });
+  }
+
+  private resetResults(): void {
+    for(let group of this.testTree){
+      for(let test of group.tests){
+        test.result = '';
+        test.testIcon = '';
+      }
+    }
   }
 
   private startPolling() : void{
@@ -74,8 +84,10 @@ export class TestPageComponent implements OnInit {
   getClass(testObj: TestObject): string{
     if(testObj.result === 'success'){
       return 'is-success is-solid';
-    } else{
+    } else if(testObj.result === 'failed') {
       return 'is-error is-solid';
+    } else {
+      return '';
     }
   }
 
