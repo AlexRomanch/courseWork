@@ -1,3 +1,8 @@
+<label>
+  Choose tests and press "Start"
+</label>
+
+
 <clr-tree-node [(clrSelected)]="selected">
   Smartphone tests
   <ng-template [clrIfExpanded]="true">
@@ -7,9 +12,22 @@
       {{testObject.group}}
       <ng-template [(clrIfExpanded)]="testObject.expanded">
         <clr-tree-node *ngFor="let test of testObject.tests" [(clrSelected)]="test.enable">
+          <clr-icon [attr.shape]="test.testIcon" *ngIf="test.testIcon" [class]="getClass(test)" size="20"></clr-icon>
           {{test.name}}
         </clr-tree-node>
       </ng-template>
     </clr-tree-node>
   </ng-template>
 </clr-tree-node>
+
+
+<div style="width: 500px">
+  <button type="button" (click)="startTesting()" class="btn btn-primary" [disabled]="processInProgress">
+    Start
+  </button>
+
+
+  <div class="progress loop" *ngIf="processInProgress"><progress></progress></div>
+</div>
+
+
