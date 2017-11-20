@@ -1,13 +1,13 @@
 <clr-tree-node [(clrSelected)]="selected">
-  Permissions
+  Smartphone tests
   <ng-template [clrIfExpanded]="true">
     <clr-tree-node
-      *ngFor="let permission of permissions"
-      [(clrSelected)]="permission.selected">
-      {{permission.type}}
-      <ng-template [(clrIfExpanded)]="permission.expanded">
-        <clr-tree-node *ngFor="let right of permission.rights" [(clrSelected)]="right.enable">
-          {{right.name}}
+      *ngFor="let testObject of testTree"
+      (clrSelected)="true">
+      {{testObject.group}}
+      <ng-template [(clrIfExpanded)]="testObject.expanded">
+        <clr-tree-node *ngFor="let test of testObject.tests" [(clrSelected)]="test.enable">
+          {{test.name}}
         </clr-tree-node>
       </ng-template>
     </clr-tree-node>

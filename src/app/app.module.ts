@@ -12,6 +12,8 @@ import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AccountService} from "./services/account.service";
 import { TestPageComponent } from './main/test-page/test-page.component';
+import {TestProcessService} from "./test-process.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const routes = [
   {path: '', component: LoginComponent},
@@ -37,11 +39,12 @@ const routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     ClarityModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard, AuthService, AccountService],
+  providers: [AuthGuard, AuthService, AccountService, TestProcessService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

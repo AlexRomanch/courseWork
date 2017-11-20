@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         if (authResponse.isAuth) {
           this.authFailedMsg = '';
           console.log('user id: ', authResponse.userId);
-          this.router.navigate(['/main']);
+          this.router.navigate(['/main/personalAccount']);
         } else {
           this.authFailedMsg = 'Incorrect login/password'
         }
