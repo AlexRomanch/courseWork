@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {TestProcessService} from "../../test-process.service";
+import {TestProcessService} from "../../services/test-process.service";
 import {TestGroup} from "./testGroup";
 import {Observable} from 'rxjs/Rx';
 import {TestObject} from "./testObject";
+import {TestProcessWatcherService} from "../../services/test-process-watcher.service";
 
 @Component({
   selector: 'app-test-page',
@@ -16,7 +17,8 @@ export class TestPageComponent implements OnInit {
   testTree: TestGroup[] = [];
   sessionId: number;
 
-  constructor(private testProcessService: TestProcessService) {
+  constructor(private testProcessService: TestProcessService,
+              private processWatcher: TestProcessWatcherService) {
   }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class TestPageComponent implements OnInit {
         this.sessionId = sessionId;
         this.processInProgress = true;
         this.startPolling();
+        this.processWatcher.processRun();
       }
     });
   }
@@ -54,7 +57,7 @@ export class TestPageComponent implements OnInit {
 
 
         if(!processInfo.processAlive){
-          //console.log('unsubscribe!');
+          this.processWatcher.processEnded();
           subscription.unsubscribe();
           this.processInProgress = false;
         }

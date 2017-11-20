@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {TestGroup} from "./main/test-page/testGroup";
+import {TestGroup} from "../main/test-page/testGroup";
 import {Observable} from "rxjs/Observable";
-import {Constants} from "./Constants";
+import {Constants} from "../Constants";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {GetTestsResponse} from "./services/GetTestsResponse";
-import {StartTestProcessRequest} from "./services/StartTestProcessRequest";
-import {TypicalResponse} from "./services/typicalResponse";
-import {TestProcessInfo} from "./services/TestProcessInfo";
-import {TestObject} from "./main/test-page/testObject";
+import {GetTestsResponse} from "./GetTestsResponse";
+import {StartTestProcessRequest} from "./StartTestProcessRequest";
+import {TypicalResponse} from "./typicalResponse";
+import {TestProcessInfo} from "./TestProcessInfo";
+import {TestObject} from "../main/test-page/testObject";
 
 @Injectable()
 export class TestProcessService {
